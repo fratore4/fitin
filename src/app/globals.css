@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 90, 90, 90;
+  --background-rgb: 245, 240, 230;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #f5f3ef; /* grigio perla */
+  min-height: 100vh;
+  font-family: 'Montserrat', 'Lato', Arial, sans-serif;
+}
+
+/* Stili personalizzati per un aspetto più elegante */
+.elegant-shadow {
+  box-shadow: 0 4px 16px rgba(180, 154, 122, 0.10);
+}
+
+.elegant-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(180, 154, 122, 0.10);
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
+  border: 1px solid #f2f2f2;
+}
+
+.elegant-card:hover {
+  box-shadow: 0 8px 32px rgba(180, 154, 122, 0.15);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.button-elegant {
+  background: linear-gradient(90deg, #b49a7a 0%, #c2a46b 100%);
+  color: #fff;
+  border-radius: 9999px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(180, 154, 122, 0.10);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.button-elegant:hover {
+  background: linear-gradient(90deg, #c2a46b 0%, #b49a7a 100%);
+  box-shadow: 0 4px 16px rgba(180, 154, 122, 0.15);
+  transform: scale(1.03);
+}
+
+.navbar-elegant {
+  background: #fff;
+  border-bottom: 1px solid #e5ded6;
+  box-shadow: 0 2px 8px rgba(180, 154, 122, 0.04);
+  padding: 1.5rem 0;
+}
+
+.footer-elegant {
+  background: #f5f3ef;
+  color: #b49a7a;
+  border-top: 1px solid #e5ded6;
+  padding: 2rem 0 1rem 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
+input, select, textarea {
+  border-radius: 0.5rem;
+  border: 1px solid #e5ded6;
+  background: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  transition: border 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #b49a7a;
+  outline: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', 'Lato', Arial, sans-serif;
+  color: #b49a7a;
+  font-weight: 700;
+} 

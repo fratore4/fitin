@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitIn - Trova i mobili perfetti per il tuo spazio</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+  <style>
+    /* Stili di base */
+    :root {
+      --primary-color: #384455;
+      --secondary-color: #a9a399;
+      --accent-color: #d9a67a;
+      --background-color: #ffffff;
+      --light-gray: #f5f5f3;
+      --text-color: #2a2a2a;
+      --text-light: #767676;
+      --divider-color: #e4e2dd;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+    
+    h1, h2, h3 {
+      font-weight: 500;
+    }
+    
+    /* Header */
+    header {
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--primary-color);
+      letter-spacing: 1px;
+    }
+    
+    .menu {
+      display: flex;
+      list-style: none;
+    }
+    
+    .menu li {
+      margin-left: 30px;
+    }
+    
+    .menu a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 400;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      position: relative;
+      padding-bottom: 5px;
+    }
+    
+    .menu a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary-color);
+      transition: width 0.3s;
+    }
+    
+    .menu a:hover {
+      color: var(--primary-color);
+    }
+    
+    .menu a:hover:after {
+      width: 100%;
+    }
+    
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 140px 0 100px;
+      background-color: var(--light-gray);
+      position: relative;
+    }
+    
+    .hero:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: var(--divider-color);
+    }
+    
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+    }
+    
+    .hero p {
+      font-size: 20px;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+    
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      margin: 80px 0;
+    }
+    
+    .feature-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 40px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    }
+    
+    .feature-card h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .feature-card h2:after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent-color);
+    }
+    
+    .feature-card p {
+      margin-bottom: 25px;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+    
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 0;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 13px;
+      transition: all 0.3s;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+      border: 1px solid var(--primary-color);
+    }
+    
+    .btn-primary:hover {
+      background-color: #465669;
+      color: white;
+      border-color: #465669;
+    }
+    
+    .btn-secondary {
+      background-color: var(--accent-color);
+      color: white;
+      border: 1px solid var(--accent-color);
+    }
+    
+    .btn-secondary:hover {
+      background-color: #c1916d;
+      color: white;
+      border-color: #c1916d;
+    }
+    
+    /* Categories */
+    .categories {
+      margin: 80px 0;
+      padding: 60px 0;
+      background-color: var(--light-gray);
+    }
+    
+    .categories h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 32px;
+      color: var(--primary-color);
+      position: relative;
+      padding-bottom: 15px;
+      display: inline-block;
+    }
+    
+    .categories-title-container {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .categories h2:after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 1px;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--accent-color);
+    }
+    
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 25px;
+    }
+    
+    .category-item {
+      background-color: white;
+      padding: 25px 15px;
+      border-radius: 6px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+      font-weight: 400;
+    }
+    
+    .category-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      color: var(--primary-color);
+    }
+    
+    /* Search Form */
+    .search-panel {
+      background-color: white;
+      border-radius: 8px;
+      padding: 50px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin: 80px 0;
+    }
+    
+    .search-title {
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 15px;
+    }
+    
+    .search-title:after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent-color);
+    }
+    
+    .search-panel h2 {
+      font-size: 28px;
+      color: var(--primary-color);
+    }
+    
+    .search-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: var(--text-color);
+      font-size: 15px;
+    }
+    
+    .form-group select,
+    .form-group input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      font-size: 15px;
+      background-color: #f9fafb;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    
+    .form-group select:focus,
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(217, 166, 122, 0.1);
+    }
+    
+    .dimensions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+    
+    .search-btn {
+      text-align: center;
+      margin-top: 30px;
+    }
+    
+    /* Results Section */
+    .results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .furniture-card {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .furniture-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .furniture-image {
+      height: 200px;
+      background-color: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      font-weight: 500;
+      position: relative;
+    }
+    
+    .furniture-content {
+      padding: 25px;
+    }
+    
+    .furniture-title {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    
+    .furniture-dimensions {
+      color: var(--text-light);
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    
+    .furniture-price {
+      font-weight: 600;
+      color: var(--accent-color);
+      font-size: 20px;
+      display: block;
+      margin-bottom: 15px;
+    }
+    
+    .furniture-source {
+      color: #9ca3af;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    
+    .furniture-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .heart-button {
+      background: none;
+      border: none;
+      color: #9ca3af;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    
+    .heart-button:hover {
+      color: var(--accent-color);
+    }
+    
+    /* Favorites Section */
+    .favorites-section {
+      margin: 80px 0;
+    }
+    
+    .favorites-title {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: var(--primary-color);
+      position: relative;
+      padding-bottom: 15px;
+      display: inline-block;
+    }
+    
+    .favorites-title:after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent-color);
+    }
+    
+    .empty-favorites {
+      background-color: white;
+      padding: 50px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .empty-favorites p {
+      color: var(--text-light);
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--light-gray);
+      padding: 60px 0;
+      margin-top: 80px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-column h3 {
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-column a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+      font-size: 14px;
+    }
+    
+    .footer-column a:hover {
+      color: var(--primary-color);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 30px;
+    }
+    
+    .footer-text {
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .features,
+      .search-form,
+      .results {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero h1 {
+        font-size: 32px;
+      }
+      
+      .hero p {
+        font-size: 16px;
+      }
+      
+      .search-panel {
+        padding: 30px 20px;
+      }
+      
+      .dimensions-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .menu {
+        display: none;
+      }
+      
+      /* Simple mobile menu button */
+      .mobile-menu-btn {
+        display: block;
+        font-size: 24px;
+      }
+    }
+    
+    @media (min-width: 769px) {
+      .mobile-menu-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">FitIn</div>
+        <div class="mobile-menu-btn">☰</div>
+        <ul class="menu">
+          <li><a href="#">Home</a></li>
+          <li><a href="#ricerca">Ricerca</a></li>
+          <li><a href="#preferiti">Preferiti</a></li>
+          <li><a href="#">Chi siamo</a></li>
+          <li><a href="#">Contatti</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1>Il mobile perfetto per il tuo spazio</h1>
+        <p>FitIn ti aiuta a trovare mobili che si adattano esattamente alle dimensioni che hai a disposizione, confrontando diverse opzioni da vari negozi online.</p>
+      </div>
+    </section>
+    
+    <!-- Features -->
+    <div class="container">
+      <section class="features">
+        <div class="feature-card">
+          <h2>Ricerca per Dimensioni</h2>
+          <p>Inserisci le dimensioni dello spazio disponibile e trova mobili che si adattano perfettamente alle tue esigenze senza doverti preoccupare di misurazioni errate.</p>
+          <a href="#ricerca" class="btn btn-primary">Inizia la ricerca</a>
+        </div>
+        
+        <div class="feature-card">
+          <h2>Salva i tuoi Preferiti</h2>
+          <p>Salva i mobili che ti piacciono e confrontali in seguito per fare la scelta migliore. FitIn ti permette di vedere tutte le tue selezioni in un unico posto.</p>
+          <a href="#preferiti" class="btn btn-secondary">Vai ai preferiti</a>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Categories -->
+    <section class="categories">
+      <div class="container">
+        <div class="categories-title-container">
+          <h2>Categorie Popolari</h2>
+        </div>
+        <div class="category-grid">
+          <div class="category-item">Divani</div>
+          <div class="category-item">Tavoli</div>
+          <div class="category-item">Sedie</div>
+          <div class="category-item">Armadi</div>
+          <div class="category-item">Letti</div>
+          <div class="category-item">Librerie</div>
+          <div class="category-item">Scrivanie</div>
+          <div class="category-item">Cassettiere</div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Search Section -->
+    <div class="container">
+      <section id="ricerca" class="search-panel">
+        <div class="search-title">
+          <h2>Ricerca Mobili</h2>
+        </div>
+        
+        <form class="search-form">
+          <!-- Tipo Mobile -->
+          <div class="form-group">
+            <label for="tipo">Tipo di Mobile</label>
+            <select id="tipo">
+              <option value="">Seleziona...</option>
+              <option value="divano">Divano</option>
+              <option value="tavolo">Tavolo</option>
+              <option value="sedia">Sedia</option>
+              <option value="armadio">Armadio</option>
+              <option value="letto">Letto</option>
+            </select>
+          </div>
+          
+          <!-- Dimensioni -->
+          <div class="form-group">
+            <label>Dimensioni (cm)</label>
+            <div class="dimensions-grid">
+              <div>
+                <label for="larghezza" style="font-size: 14px;">Larghezza</label>
+                <input type="number" id="larghezza" placeholder="0">
+              </div>
+              <div>
+                <label for="altezza" style="font-size: 14px;">Altezza</label>
+                <input type="number" id="altezza" placeholder="0">
+              </div>
+              <div>
+                <label for="profondita" style="font-size: 14px;">Profondità</label>
+                <input type="number" id="profondita" placeholder="0">
+              </div>
+            </div>
+          </div>
+          
+          <!-- Prezzo -->
+          <div class="form-group">
+            <label for="prezzo">Prezzo Massimo (€)</label>
+            <input type="number" id="prezzo" placeholder="0">
+          </div>
+        </form>
+        
+        <div class="search-btn">
+          <button class="btn btn-primary">Cerca</button>
+        </div>
+        
+        <!-- Example Results (initially hidden, would be shown after search) -->
+        <div class="results" style="display: none;">
+          <div class="furniture-card">
+            <div class="furniture-image">Divano</div>
+            <div class="furniture-content">
+              <h3 class="furniture-title">Divano Moderno 3 Posti</h3>
+              <p class="furniture-dimensions">220cm x 85cm x 95cm</p>
+              <span class="furniture-price">€599</span>
+              <p class="furniture-source">Fonte: MobiliShop</p>
+              <div class="furniture-actions">
+                <a href="#" class="btn btn-secondary" style="font-size: 12px; padding: 8px 15px;">Dettagli</a>
+                <button class="heart-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Favorites Section -->
+      <section id="preferiti" class="favorites-section">
+        <h2 class="favorites-title">I tuoi Preferiti</h2>
+        
+        <div class="empty-favorites">
+          <p>Non hai ancora salvato nessun mobile nei preferiti.</p>
+          <a href="#ricerca" class="btn btn-primary">Inizia a cercare</a>
+        </div>
+      </section>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>FitIn</h3>
+          <ul>
+            <li><a href="#">Chi siamo</a></li>
+            <li><a href="#">Come funziona</a></li>
+            <li><a href="#">I nostri partner</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Categorie</h3>
+          <ul>
+            <li><a href="#">Divani</a></li>
+            <li><a href="#">Tavoli</a></li>
+            <li><a href="#">Letti</a></li>
+            <li><a href="#">Armadi</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Assistenza</h3>
+          <ul>
+            <li><a href="#">Contattaci</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Termini di servizio</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-text">© 2025 FitIn - Tutti i diritti riservati</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html> 
