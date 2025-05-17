@@ -388,7 +388,129 @@ export default function SearchPage() {
               </div>
             </div>
             
-            {/* Resto del codice del form di ricerca... */}
+            {/* Selezione negozi */}
+            <div className="mb-6">
+              <p className="font-medium text-primary mb-2">Confronta prezzi da:</p>
+              <div className="flex flex-wrap gap-3">
+                <label className="flex items-center bg-cream p-2 rounded-md hover:bg-sand transition-colors cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={negozi.fabbricheMobili}
+                    onChange={() => setNegozi({...negozi, fabbricheMobili: !negozi.fabbricheMobili})}
+                    className="mr-2 h-5 w-5 accent-primary"
+                  />
+                  <span className="text-darkgray">Fabbriche Mobili</span>
+                </label>
+                <label className="flex items-center bg-cream p-2 rounded-md hover:bg-sand transition-colors cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={negozi.astaDelMobile}
+                    onChange={() => setNegozi({...negozi, astaDelMobile: !negozi.astaDelMobile})}
+                    className="mr-2 h-5 w-5 accent-primary"
+                  />
+                  <span className="text-darkgray">Asta del Mobile</span>
+                </label>
+                <label className="flex items-center bg-cream p-2 rounded-md hover:bg-sand transition-colors cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={negozi.milanoBedding}
+                    onChange={() => setNegozi({...negozi, milanoBedding: !negozi.milanoBedding})}
+                    className="mr-2 h-5 w-5 accent-primary"
+                  />
+                  <span className="text-darkgray">Milano Bedding</span>
+                </label>
+                <label className="flex items-center bg-cream p-2 rounded-md hover:bg-sand transition-colors cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={negozi.baxter}
+                    onChange={() => setNegozi({...negozi, baxter: !negozi.baxter})}
+                    className="mr-2 h-5 w-5 accent-primary"
+                  />
+                  <span className="text-darkgray">Baxter</span>
+                </label>
+                <label className="flex items-center bg-cream p-2 rounded-md hover:bg-sand transition-colors cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={negozi.ikea}
+                    onChange={() => setNegozi({...negozi, ikea: !negozi.ikea})}
+                    className="mr-2 h-5 w-5 accent-primary"
+                  />
+                  <span className="text-darkgray">IKEA</span>
+                </label>
+                <label className="flex items-center bg-cream p-2 rounded-md hover:bg-sand transition-colors cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={negozi.semeraro}
+                    onChange={() => setNegozi({...negozi, semeraro: !negozi.semeraro})}
+                    className="mr-2 h-5 w-5 accent-primary"
+                  />
+                  <span className="text-darkgray">Semeraro</span>
+                </label>
+                <label className="flex items-center bg-cream p-2 rounded-md hover:bg-sand transition-colors cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={negozi.conforama}
+                    onChange={() => setNegozi({...negozi, conforama: !negozi.conforama})}
+                    className="mr-2 h-5 w-5 accent-primary"
+                  />
+                  <span className="text-darkgray">Conforama</span>
+                </label>
+              </div>
+            </div>
+            
+            {/* Filtri avanzati (tra cui prezzo) */}
+            <div className="mb-8">
+              <button
+                type="button"
+                onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+                className="flex items-center text-primary font-medium mb-3"
+              >
+                <span>Filtri avanzati</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`ml-1 h-5 w-5 transition-transform ${showAdvancedFilters ? 'transform rotate-180' : ''}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {showAdvancedFilters && (
+                <div className="p-4 bg-cream rounded-md">
+                  {/* Range prezzo (meno evidente) */}
+                  <div className="mb-4">
+                    <div className="flex justify-between mb-1">
+                      <label className="text-sm text-darkgray" htmlFor="prezzo">Prezzo massimo (€):</label>
+                      <span className="text-sm font-medium">{prezzoMax} €</span>
+                    </div>
+                    <input
+                      id="prezzo"
+                      type="range"
+                      min="50"
+                      max="10000"
+                      step="50"
+                      value={prezzoMax}
+                      onChange={(e) => setPrezzoMax(e.target.value)}
+                      className="w-full h-2 bg-white rounded-lg appearance-none cursor-pointer accent-primary"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            <div className="mt-auto">
+              <button 
+                onClick={handleRicerca}
+                className="button-elegant w-full text-lg font-medium flex items-center justify-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                Trova e Confronta
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -408,7 +530,103 @@ export default function SearchPage() {
                   elementiSelezionati.includes(item.id) ? 'ring-2 ring-primary' : ''
                 }`}
               >
-                {/* Contenuto della card */}
+                {/* Immagine */}
+                <div className="relative w-full h-48 mb-4">
+                  <Image
+                    src={item.image_url || item.immagine || '/images/placeholder.jpg'}
+                    alt={item.name}
+                    fill
+                    className="object-cover rounded-md"
+                  />
+                </div>
+                
+                {/* Contenuto */}
+                <div className="space-y-2">
+                  <h3 className="text-lg font-semibold text-primary">{item.name}</h3>
+                  
+                  <div className="text-sm text-darkgray">
+                    <p>Dimensioni:</p>
+                    <ul className="list-disc list-inside">
+                      <li>Larghezza: {item.width ?? 'N/D'} cm</li>
+                      <li>Altezza: {item.height ?? 'N/D'} cm</li>
+                      <li>Profondità: {item.depth ?? 'N/D'} cm</li>
+                    </ul>
+                  </div>
+                  
+                  <p className="font-medium">€{item.price}</p>
+                  <p className="text-sm text-darkgray">Negozio: {item.store?.name}</p>
+                  
+                  {/* Badge stile */}
+                  {determinaStileMobile(item) && (
+                    <div className="mt-1">
+                      <span className="inline-block px-3 py-1 bg-secondary text-primary text-xs rounded-full font-semibold shadow-sm">
+                        Stile: {determinaStileMobile(item)}
+                      </span>
+                    </div>
+                  )}
+                  
+                  {/* Disponibilità */}
+                  <p className={`text-sm ${
+                    item.availability_status === 'Disponibile' 
+                      ? 'text-green-600' 
+                      : 'text-orange-600'
+                  }`}>
+                    {item.availability_status || 'Disponibile'}
+                  </p>
+                  
+                  {/* Bottone per letti con più misure */}
+                  {["Fiji", "Cocos", "Casablanca", "Paris"].includes(item.name) && (
+                    <div className="mt-1">
+                      <span className="inline-block px-3 py-1 bg-primary text-white text-xs rounded-full font-semibold shadow-sm">Diverse misure disponibili</span>
+                    </div>
+                  )}
+                  
+                  {/* Materiali e Colori */}
+                  {item.materials && item.materials.length > 0 && (
+                    <div className="text-sm">
+                      <p className="font-medium">Materiali:</p>
+                      <p>{item.materials.map((m: { name: string }) => m.name).join(', ')}</p>
+                    </div>
+                  )}
+                  
+                  {item.colors && item.colors.length > 0 && (
+                    <div className="text-sm">
+                      <p className="font-medium">Colori:</p>
+                      <div className="flex gap-1">
+                        {item.colors.map((colore: { id: string; name: string }) => (
+                          <span 
+                            key={colore.id}
+                            className="px-2 py-1 bg-sand rounded-md text-xs"
+                          >
+                            {colore.name}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Pulsanti azioni */}
+                  <div className="flex justify-between items-center mt-4">
+                    <a
+                      href={item.product_url || '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-primary hover:underline"
+                    >
+                      Vedi dettagli
+                    </a>
+                    
+                    <button
+                      onClick={() => toggleElemento(item.id)}
+                      className={`button-elegant px-3 py-1 text-sm ${
+                        elementiSelezionati.includes(item.id)
+                          ? 'bg-primary text-white' : 'bg-sand text-darkgray'
+                      }`}
+                    >
+                      {elementiSelezionati.includes(item.id) ? 'Selezionato' : 'Seleziona'}
+                    </button>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -422,6 +640,82 @@ export default function SearchPage() {
           
           <div className="elegant-card overflow-hidden">
             {/* Contenuto confronto */}
+            <div className="grid grid-cols-4 divide-x divide-sand">
+              {/* Prima colonna con proprietà */}
+              <div className="p-4 bg-cream">
+                <div className="h-48"></div>
+                <div className="py-4 font-medium text-darkgray">Nome</div>
+                <div className="py-4 font-medium text-darkgray">Negozio</div>
+                <div className="py-4 font-medium text-darkgray">Prezzo</div>
+                <div className="py-4 font-medium text-darkgray">Tipo</div>
+                <div className="py-4 font-medium text-darkgray">Larghezza</div>
+                <div className="py-4 font-medium text-darkgray">Altezza</div>
+                <div className="py-4 font-medium text-darkgray">Profondità</div>
+                <div className="py-4 font-medium text-darkgray">Disponibilità</div>
+                <div className="py-4 font-medium text-darkgray">Materiali</div>
+                <div className="py-4 font-medium text-darkgray">Colori disponibili</div>
+              </div>
+              
+              {/* Colonne con prodotti */}
+              {elementiDaComparare.map(item => (
+                <div key={item.id} className="p-4">
+                  <div className="relative h-48 w-full bg-lightgray mb-4">
+                    <Image
+                      src={item.image_url || item.immagine || '/images/placeholder.jpg'}
+                      alt={item.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="py-4 text-darkgray">{item.name}</div>
+                  <div className="py-4">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium text-white ${
+                      item.store?.name === 'Fabbriche Mobili' ? 'bg-blue-500' :
+                      item.store?.name === 'Asta del Mobile' ? 'bg-green-500' :
+                      item.store?.name === 'Milano Bedding' ? 'bg-purple-500' :
+                      item.store?.name === 'Baxter' ? 'bg-red-500' : 'bg-orange-500'
+                    }`}>
+                      {item.store?.name}
+                    </span>
+                  </div>
+                  <div className="py-4 font-semibold text-primary">€{item.price}</div>
+                  <div className="py-4 text-darkgray">{item.category?.name}</div>
+                  <div className="py-4 text-darkgray">{item.width ?? 'N/D'} cm</div>
+                  <div className="py-4 text-darkgray">{item.height ?? 'N/D'} cm</div>
+                  <div className="py-4 text-darkgray">{item.depth ?? 'N/D'} cm</div>
+                  <div className="py-4 text-darkgray">{item.availability_status || 'Disponibile'}</div>
+                  <div className="py-4 text-darkgray">
+                    {item.materials && item.materials.length > 0 
+                      ? item.materials.map((m: { name: string }) => m.name).join(', ') 
+                      : '-'}
+                  </div>
+                  <div className="py-4">
+                    {item.colors && item.colors.length > 0 ? (
+                      <div className="flex flex-wrap gap-1">
+                        {item.colors.map((colore: { id: string; name: string }) => (
+                          <span 
+                            key={colore.id}
+                            className="px-2 py-1 bg-sand rounded-md text-xs"
+                          >
+                            {colore.name}
+                          </span>
+                        ))}
+                      </div>
+                    ) : '-'}
+                  </div>
+                  <div className="py-4">
+                    <a 
+                      href={item.product_url || '#'} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="button-elegant text-sm inline-block"
+                    >
+                      Visita prodotto
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
