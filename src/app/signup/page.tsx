@@ -37,14 +37,17 @@ export default function SignupPage() {
     // 2. Salva dati aggiuntivi su user_profiles
     const userId = data.user?.id;
     if (userId) {
+      // Converto età in numero
+      const etaNumero = form.eta ? parseInt(form.eta, 10) : null;
+      
       const { error: profileError } = await supabase
         .from("user_profiles")
-        .insert({
+        .insert([{
           id: userId,
           full_name: form.nome + " " + form.cognome,
-          eta: form.eta,
+          eta: etaNumero,
           citta: form.citta
-        });
+        }]);
       if (profileError) {
         setError("Registrazione utente riuscita, ma errore nel salvataggio del profilo: " + profileError.message);
         setLoading(false);
