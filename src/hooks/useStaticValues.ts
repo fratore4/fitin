@@ -1,5 +1,5 @@
 // Valori statici per i negozi
-export const STORES = ['Fabbriche Mobili', 'Asta del Mobile', 'Milano Bedding', 'Baxter'] as const;
+export const STORES = ['Fabbriche Mobili', 'Asta del Mobile', 'Milano Bedding', 'Baxter', 'IKEA', 'Semeraro', 'Conforama'] as const;
 
 // Valori statici per i tipi di mobili
 export const FURNITURE_TYPES = [
