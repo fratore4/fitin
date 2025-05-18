@@ -18,9 +18,6 @@ export default function SearchPage() {
   const [immagineAmbiente, setImmagineAmbiente] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [negozi, setNegozi] = useState({
-    ikea: false,
-    semeraro: false,
-    conforama: false,
     fabbricheMobili: true,
     astaDelMobile: true,
     milanoBedding: true,
@@ -86,9 +83,6 @@ export default function SearchPage() {
       }
       risultatiFiltrati = risultatiFiltrati.filter(item => {
         if (!item.store) return false;
-        if (item.store.name === 'IKEA' && negozi.ikea) return true;
-        if (item.store.name === 'Semeraro' && negozi.semeraro) return true;
-        if (item.store.name === 'Conforama' && negozi.conforama) return true;
         if (item.store.name === 'Fabbriche Mobili' && negozi.fabbricheMobili) return true;
         if (item.store.name === 'Asta del Mobile' && negozi.astaDelMobile) return true;
         if (item.store.name === 'Milano Bedding' && negozi.milanoBedding) return true;
@@ -166,9 +160,6 @@ export default function SearchPage() {
     // Filtro per negozi
     risultatiFiltrati = risultatiFiltrati.filter(item => {
       if (!item.store) return false;
-      if (item.store.name === 'IKEA' && negozi.ikea) return true;
-      if (item.store.name === 'Semeraro' && negozi.semeraro) return true;
-      if (item.store.name === 'Conforama' && negozi.conforama) return true;
       if (item.store.name === 'Fabbriche Mobili' && negozi.fabbricheMobili) return true;
       if (item.store.name === 'Asta del Mobile' && negozi.astaDelMobile) return true;
       if (item.store.name === 'Milano Bedding' && negozi.milanoBedding) return true;
@@ -427,33 +418,6 @@ export default function SearchPage() {
                     className="mr-2 h-5 w-5 accent-primary"
                   />
                   <span className="text-darkgray">Baxter</span>
-                </label>
-                <label className="flex items-center bg-cream p-2 rounded-md hover:bg-sand transition-colors cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={negozi.ikea}
-                    onChange={() => setNegozi({...negozi, ikea: !negozi.ikea})}
-                    className="mr-2 h-5 w-5 accent-primary"
-                  />
-                  <span className="text-darkgray">IKEA</span>
-                </label>
-                <label className="flex items-center bg-cream p-2 rounded-md hover:bg-sand transition-colors cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={negozi.semeraro}
-                    onChange={() => setNegozi({...negozi, semeraro: !negozi.semeraro})}
-                    className="mr-2 h-5 w-5 accent-primary"
-                  />
-                  <span className="text-darkgray">Semeraro</span>
-                </label>
-                <label className="flex items-center bg-cream p-2 rounded-md hover:bg-sand transition-colors cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={negozi.conforama}
-                    onChange={() => setNegozi({...negozi, conforama: !negozi.conforama})}
-                    className="mr-2 h-5 w-5 accent-primary"
-                  />
-                  <span className="text-darkgray">Conforama</span>
                 </label>
               </div>
             </div>
